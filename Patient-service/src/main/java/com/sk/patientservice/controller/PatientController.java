@@ -1,11 +1,11 @@
 package com.sk.patientservice.controller;
 
+import com.sk.patientservice.dto.PatientRequestDTO;
 import com.sk.patientservice.dto.PatientResponseDTO;
 import com.sk.patientservice.service.PatientService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,4 +25,9 @@ public class PatientController {
         return ResponseEntity.ok().body(list);
     }
 
+    @PostMapping
+    public ResponseEntity<PatientResponseDTO> createPatient(@Valid @RequestBody PatientRequestDTO patientRequestDTO){
+        PatientResponseDTO patientResponseDTO = patientService.createPatient(patientRequestDTO);
+        return ResponseEntity.ok().body(patientResponseDTO);
+    }
 }
